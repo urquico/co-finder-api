@@ -15,7 +15,6 @@ import puppeteer from "puppeteer";
     await page.setViewport({ width: 1280, height: 800 });
 
     await page.waitForSelector("body");
-    a;
 
     // Scroll the container for a longer time
     await page.evaluate(async () => {
