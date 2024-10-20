@@ -146,3 +146,17 @@ export const scrape = async (options: ScrapeOptions) => {
     return { error: error, status: 500 };
   }
 };
+
+export const findOptimalPath = async (coordinates: string, shopCoordinates: string) => {
+  //  http://router.project-osrm.org/route/v1/driving/13.388860,52.517037;13.397634,52.529407;13.428555,52.523219?overview=false
+  const URL = `http://router.project-osrm.org/route/v1/driving/${coordinates};${shopCoordinates}?overview=false`;
+
+  const browser = await puppeteer.launch({ headless: false });
+  const page = await browser.newPage();
+
+  await page.goto(URL, { waitUntil: "networkidle2" });
+
+  await page.setViewport({ width: 1280, height: 800 });
+
+  await page.waitForSelector("body");
+};

@@ -1,6 +1,6 @@
 import puppeteer from "puppeteer";
 import express from "express";
-import { scrape } from "./scrape";
+import { findOptimalPath, scrape } from "./scrape";
 
 const app = express();
 
@@ -22,4 +22,13 @@ app.get("/all/shops", async (req, res) => {
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
+});
+
+app.get("/optimal-path", async (req, res) => {
+  const coordinates: string = req.query.coordinates as string;
+  const shopCoordinates: string = req.query.shopCoordinates as string;
+
+  const optimalPath = await findOptimalPath(coordinates, shopCoordinates);
+
+  res.json(optimalPath);
 });
