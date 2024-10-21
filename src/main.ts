@@ -12,7 +12,7 @@ app.get("/", (_req, res) => {
 
 app.get("/all/shops", async (req, res) => {
   const shops = await scrape({
-    verbose: false,
+    verbose: true,
     context: req.query.context as string,
     coordinates: req.query.coordinates as string,
   });
